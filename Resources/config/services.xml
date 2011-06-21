@@ -4,4 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="jms_crm_bundle.mailer.class">JMS\CrmBundle\Mailer\Mailer</parameter>
+    </parameters>
+
+    <services>
+        <service id="jms_crm_bundle.mailer" class="%jms_crm_bundle.mailer.class%">
+            <argument type="service" id="jms_crm_bundle.mailer" />
+            <argument type="service" id="jms_crm_bundle.entity_manager" />
+            <argument>%jms_crm_bundle.from_email%</argument>
+        </service>
+        <service id="jms_crm_bundle.entity_manager" alias="doctrine.orm.default_entity_manager" />
+        <service id="jms_crm_bundle.mailer" alias="mailer" />
+    </services>
+
 </container>

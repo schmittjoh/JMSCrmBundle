@@ -33,7 +33,7 @@ class Conversation
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="JMS\CrmBundle\Entity\Message", cascade = {"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="JMS\CrmBundle\Entity\Message", cascade = {"persist"}, orphanRemoval=true, mappedBy="conversation")
      */
     private $messages;
 

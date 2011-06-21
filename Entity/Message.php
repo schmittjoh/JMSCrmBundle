@@ -16,7 +16,7 @@ class Message
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="auto")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -45,14 +45,26 @@ class Message
     private $email;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     */
+    private $subject;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
     private $message;
 
-    public function __construct()
+    /**
+     * @ORM\ManyToOne(targetEntity="JMS\CrmBundle\Entity\User")
+     */
+    private $sender;
+
+    public function __construct(User $sender = null)
     {
         $this->createdAt = new \DateTime;
+        $this->sender = $sender;
     }
 
     public function getId()
@@ -78,6 +90,11 @@ class Message
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getSubject()
+    {
+        return $this->subject;
     }
 
     public function getMessage()
@@ -106,10 +123,16 @@ class Message
         $this->email = $email;
     }
 
-    public function setText($text)
+    public function setSubject($subject)
     {
         $this->assertNew();
-        $this->text = $text;
+        $this->subject = $subject;
+    }
+
+    public function setMessage($text)
+    {
+        $this->assertNew();
+        $this->message = $text;
     }
 
     private function assertNew()

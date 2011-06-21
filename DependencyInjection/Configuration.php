@@ -12,8 +12,14 @@ class Configuration implements ConfigurationInterface
         $tb = new TreeBuilder();
 
         $tb
-            ->root('jms_crm_bundle', 'array')
+            ->root('jms_crm', 'array')
                 ->children()
+                    ->scalarNode('from_email')->isRequired()->cannotBeEmpty()->end()
+                    ->arrayNode('receiver_emails')
+                        ->requiresAtLeastOneElement()
+                        ->prototype('scalar')
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;

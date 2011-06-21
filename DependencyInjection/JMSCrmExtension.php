@@ -17,5 +17,7 @@ class JMSCrmExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(array(__DIR__.'/../Resources/config')));
         $loader->load('services.xml');
+
+        $container->setParameter('jms_crm_bundle.from_email', $config['from_email']);
     }
 }
