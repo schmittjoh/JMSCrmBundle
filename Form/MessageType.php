@@ -15,4 +15,9 @@ class MessageType extends AbstractType
             ->add('message')
         ;
     }
+
+    public function getName()
+    {
+        return 'jms_crm_message';
+    }
 }
