@@ -22,7 +22,7 @@ class Message
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="JMS\CrmBundle\Entity\Conversation")
+     * @ORM\ManyToOne(targetEntity="JMS\CrmBundle\Entity\Conversation", inversedBy="messages")
      */
     private $conversation;
 
